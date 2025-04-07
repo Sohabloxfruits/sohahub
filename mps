@@ -16,7 +16,7 @@ Tab:AddSlider({
 	Name = "Distance Visuality",
 	Min = 0,
 	Max = 1,
-	Default = 0.8,
+	Default = 1,
 	Color = Color3.fromRGB(255,255,255),
 	Increment = 0.1,
 	ValueName = "Distance Visuality",

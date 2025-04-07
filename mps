@@ -224,7 +224,7 @@ BallModificationsTab:AddToggle(
 )
 
 workspace.DescendantAdded:Connect(function(descendant)
-    if descendant.Name == "PSoccerBall" and descendant:IsA("BasePart") then
+    if child:IsA("BasePart") and (child.Name == "PSoccerBall" or string.find(child.Name, "Ball")) then
         descendant.Size = Vector3.new(2, 2, 2) -- Default size
         descendant.Color = Color3.fromRGB(255, 255, 255) -- Default color
 

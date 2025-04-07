@@ -176,7 +176,7 @@ local BallModificationsTab = Window:MakeTab({
 local function getBalls()
     local balls = {}
     for _, child in pairs(workspace:GetDescendants()) do
-        if child.Name == "PSoccerBall" and child:IsA("BasePart") then
+        if child:IsA("BasePart") and (child.Name == "PSoccerBall" or string.find(child.Name, "Ball") or string.find(child.Name, "Football")) then
             table.insert(balls, child)
         end
     end

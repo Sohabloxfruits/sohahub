@@ -172,23 +172,18 @@ local BallModificationsTab = Window:MakeTab({
     PremiumOnly = false
 })
 
--- Function to get all relevant ball parts in workspace
+
 local function getBalls()
     local balls = {}
     for _, child in pairs(workspace:GetDescendants()) do
-        if child:IsA("BasePart") and (
-            child.Name == "PSoccerBall"
-            or child.Name == "TPS"
-            or string.find(child.Name, "Ball")
-            or string.find(child.Name, "Football")
-        ) then
+        if child:IsA("BasePart") and (child.Name == "PSoccerBall" or string.find(child.Name, "Ball") or string.find(child.Name, "Football")) then
             table.insert(balls, child)
         end
     end
     return balls
 end
 
--- Slider to control ball size
+
 BallModificationsTab:AddSlider({
     Name = "Ball Size",
     Min = 1,
@@ -196,34 +191,38 @@ BallModificationsTab:AddSlider({
     Default = 2,
     Callback = function(value)
         for _, ball in pairs(getBalls()) do
-            ball.Size = Vector3.new(value, value, value)
+            ball.Size = Vector3.new(value, value, value) -- Resize all balls
         end
     end
 })
 
--- Color picker to change ball color
+
 BallModificationsTab:AddColorpicker({
     Name = "Ball Color",
-    Default = Color3.fromRGB(255, 255, 255), -- White
+    Default = Color3.fromRGB(255, 255, 255), -- Default color is white
     Callback = function(color)
         for _, ball in pairs(getBalls()) do
-            ball.Color = color
+            ball.Color = color -- Change color of all balls
         end
     end
 })
 
--- Toggle to enable/disable ball collisions
-BallModificationsTab:AddToggle({
-    Name = "Ball Collision",
-    Default = false,
-    Callback = function(z)
-        for _, ball in pairs(getBalls()) do
-            ball.CanCollide = z
+BallModificationsTab:AddToggle(
+    {
+        Name = "Ball Collision",
+        Default = false,
+        Callback = function(z)
+                for _, ball in pairs(getBalls()) do
+                if z then
+                    ball.CanCollide = true
+                else
+                    ball.CanCollide = false
+                end
+                end
         end
-    end
-})
+    }
+)
 
--- Automatically apply default properties to new balls when they are added
 workspace.DescendantAdded:Connect(function(descendant)
     if descendant:IsA("BasePart") and (
         descendant.Name == "PSoccerBall"
@@ -231,9 +230,8 @@ workspace.DescendantAdded:Connect(function(descendant)
         or string.find(descendant.Name, "Ball")
         or string.find(descendant.Name, "Football")
     ) then
-        descendant.Size = Vector3.new(2, 2, 2) -- Default size
+        descendant.Size = Vector3.new(3, 3, 3) -- Default size
         descendant.Color = Color3.fromRGB(255, 255, 255) -- Default color
-        descendant.CanCollide = false -- Default collision off
     end
 end)
 

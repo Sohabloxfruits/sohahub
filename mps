@@ -102,7 +102,7 @@ mt.__index = function(o, k)
     return old(o, k)
 end
 
-wait(20)
+wait(3)
 
 
 InterceptRemoteArgs(game:GetService("ReplicatedStorage").FE.Sprint, function()

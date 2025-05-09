@@ -246,3 +246,29 @@ for _, player in ipairs(game.Players:GetPlayers()) do
         removeDecalsFromCharacter(player.Character)
     end
 end
+
+
+-- Script to apply InterpolationDelay = 60 to TPS and PSoccerBall parts
+
+local function setInterpolation(part)
+	if part:IsA("BasePart") and (part.Name == "TPS" or part.Name == "PSoccerBall") then
+		pcall(function()
+			part.InterpolationDelay = 48
+		end)
+	end
+end
+
+-- TPS ball under TPSSystem
+local tpsSystem = workspace:FindFirstChild("TPSSystem")
+if tpsSystem and tpsSystem:FindFirstChild("TPS") then
+	setInterpolation(tpsSystem.TPS)
+end
+
+-- PSoccerBall(s) under Practice folder
+local practice = workspace:FindFirstChild("Practice")
+if practice then
+	for _, obj in pairs(practice:GetChildren()) do
+		setInterpolation(obj)
+	end
+end
+

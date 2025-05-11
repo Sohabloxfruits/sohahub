@@ -253,7 +253,7 @@ end
 local function setInterpolation(part)
 	if part:IsA("BasePart") and (part.Name == "TPS" or part.Name == "PSoccerBall") then
 		pcall(function()
-			part.InterpolationDelay = 48
+			part.InterpolationDelay = 44
 		end)
 	end
 end
